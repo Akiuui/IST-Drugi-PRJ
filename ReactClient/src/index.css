@@ -1,0 +1,26 @@
+body {
+  padding: 0;
+  margin: 0;
+  /* background-color: #EAEAEA; */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+.visuallyHidden {
+  clip-path: inset(50%);
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+}
+
+.hide-select-all .MuiDataGrid-columnHeader--checkbox .MuiDataGrid-columnHeaderTitleContainer {
+  display: none !important;
+}
+.hide-select-all .MuiDataGrid-columnHeader--checkbox {
+  pointer-events: none !important;
+}
