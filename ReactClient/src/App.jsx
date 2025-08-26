@@ -5,6 +5,8 @@ import { Button, createTheme, ThemeProvider } from "@mui/material";
 import entityMap from '../../Shared/entityMap.js';
 //COMPONENTS
 import NavigationBar from "./components/organisms/NavigationBar.jsx"
+
+import DropDownMenu from './components/atoms/DropDownMenu.jsx';
 //PAGES
 import ClientPage from "./components/pages/ClientPage.jsx"
 import AdminPage from "./components/pages/AdminPage.jsx";
@@ -24,16 +26,23 @@ function App() {
           }
         }
     }) 
+
+    const adminLinks = [
+      { text: 'Rezervacija', path: '/admin/rezervacija' },
+      { text: 'Vozilo', path: '/admin/vozilo' },
+      { text: 'Zakupac', path: '/admin/zakupac' },
+    ];
     
     return <>
         <ThemeProvider theme={customTheme}>
         <Router>
 
             <NavigationBar headingText={headingText}>
-                <Button variant='contained' color="secondary" onClick={() => {setHeadingText("Client")}} component={Link} to="/">Client</Button>
-                <Button variant='contained' color="secondary" onClick={() => {setHeadingText("Admin Rezervacija")}} component={Link} to="/admin/rezervacija">Rezervacija</Button>
-                <Button variant='contained' color="secondary" onClick={() => {setHeadingText("Admin Vozilo")}} component={Link} to="/admin/vozilo">Vozilo</Button>
-                <Button variant='contained' color="secondary" onClick={() => {setHeadingText("Admin Zakupac")}} component={Link} to="/admin/zakupac">Zakupac</Button>
+
+              <Button variant='contained' color="secondary" onClick={() => {setHeadingText("Client")}} component={Link} to="/">Client</Button>
+              <DropDownMenu setHeadingText={setHeadingText} btnName={"Admin"} items={adminLinks}/>
+                {/* <Button variant='contained' color="secondary" onClick={() => {setHeadingText("Admin Vozilo")}} component={Link} to="/admin/vozilo">Vozilo</Button> */}
+                {/* <Button variant='contained' color="secondary" onClick={() => {setHeadingText("Admin Zakupac")}} component={Link} to="/admin/zakupac">Zakupac</Button> */}
             </NavigationBar>
         
             <Routes>

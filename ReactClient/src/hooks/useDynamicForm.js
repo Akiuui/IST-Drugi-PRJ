@@ -27,6 +27,9 @@ function useDynamicForm({initialData, schema}) {
                         break
                     case "object":
                         initalValues[ele.name] = null
+                        break;
+                    case "date":
+                        initalValues[ele.name] = null
                     default:
                         initalValues[ele.name] = ""
                         break
@@ -66,6 +69,7 @@ function useDynamicForm({initialData, schema}) {
                 valueType = value
             break;
         }
+
         setFormValues(prev => ({
             ...prev,
             [name]: valueType

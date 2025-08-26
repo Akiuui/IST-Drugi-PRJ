@@ -2,6 +2,7 @@ import LabelCheckbox from "../atoms/LabelCheckbox"
 import { TextField } from "@mui/material"
 import ImageInput from "./ImageInput"
 import ObjectPicker from "../organisms/ObjectPicker"
+import DateTimeInput from "./DateTimeInput"
 
 const blockInvalidChars = (e) => {
     const invalid = ["e","E","+","-", ",", "."]
@@ -63,6 +64,16 @@ const inputMap = {
                 formValues={formValues[ele.name]}
                 required={ele.required}
             />
+        ),
+        Date: ({ele, handleChange, formValues}) => (
+            <DateTimeInput
+                ele={ele}
+                handleChange={handleChange}
+                formValues={formValues[ele.name]}
+                required={ele.required}
+            />
+
+
         )
         
     }

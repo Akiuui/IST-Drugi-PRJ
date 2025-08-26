@@ -23,7 +23,7 @@ function DataPage({Class}) {
     } = useDataPageController(DataClass);
 
   return (
-    <Container sx={{ height: 'calc(100vh - 64px)'}}>
+    <Container sx={{bgcolor: 'secondary.main'}} /*sx={{ height: 'calc(100vh - 64px)'}}*/>
 
       <DynamicInputForm initialData={initialData} schema={schema} onSubmitFunc={onSubmitForm}/>
 

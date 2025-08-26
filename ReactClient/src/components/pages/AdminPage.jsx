@@ -16,7 +16,7 @@ function AdminPage({Class}) {
   const [selectedRows, setSelectedRows] = useState({ type: 'include', ids: new Set() });
 
   const handleSelectionChange = (newSelection) => {
-    console.log(newSelection)
+    // console.log(newSelection)
     setSelectedRows(newSelection)
   }
 

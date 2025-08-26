@@ -16,13 +16,13 @@ const RezervacijaSchema = [
     {
         name: "datumPreuzimanja",
         label: 'Datum Preuzimanja (Date Taken)',
-        type: 'String',
+        type: 'Date',
         required: true,
     },
     {
         name: "datumVracanja",
         label: 'Datum Vracanje (Date Retieved)',
-        type: 'String',
+        type: 'Date',
         required: true,
     },
     {

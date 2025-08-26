@@ -1,12 +1,22 @@
 import {getItemAllDb} from "../services/dbActions.js"
 import { useEffect, useState } from "react"
 
-function useFetchData(DataClass) {
+const dataCache = new Map()
 
-    const [data, setData] = useState()
-    const [isLoading, setIsLoading] = useState(true)
+function useFetchData(DataClass, useCache = false) {
+    const name = DataClass.getName();
+
+
+    const [data, setData] = useState(() => useCache ? dataCache.get(name) || [] : [])
+    const [isLoading, setIsLoading] = useState(!useCache || !dataCache.has(key))
 
     async function FetchData(){
+
+      if(useCache && dataCache.has(name)){
+        setData(dataCache.get(name))
+        setIsLoading(false);
+        return
+      }
 
       setIsLoading(true)
 
@@ -31,6 +41,7 @@ function useFetchData(DataClass) {
         fetchedDataArray.push(instance)
       });
 
+      dataCache.set(name, fetchedData)
       setData(fetchedDataArray)
       setIsLoading(false)
     }
@@ -38,8 +49,9 @@ function useFetchData(DataClass) {
     useEffect(() => {
         
         FetchData()
+        console.log(useCache ? "Using cache if available" : "Fetching fresh data");
       
-    }, [])
+    }, [useCache])
 
     return {data, FetchData, isLoading}
 }

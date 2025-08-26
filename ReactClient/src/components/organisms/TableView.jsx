@@ -1,16 +1,25 @@
 import { DataGrid } from "@mui/x-data-grid"
-import { useEffect } from "react";
+import CreateGridColumns from "../../utils/CreateGridColumns";
+import { useMemo } from "react";
 
 function TableView({ DataSchema, data, selectedRows, handleSelectionChange, checkboxSelection = false, orderBy, isLoading=false}) {
     
-    const visibilityModel = {}
-    const columns = DataSchema.map(ele => {
+  
+  const columns = useMemo(() => CreateGridColumns(DataSchema), [DataSchema])
+  const rows = data;
 
-        visibilityModel[ele["name"]] = !ele["hideInTable"]
-
-        return {field: ele["name"], headerName: ele["label"], flex: 1, align: "center"}
+  const visibilityModel = useMemo(() => {
+    const model = {};
+    
+    DataSchema.forEach(ele => {
+      model[ele.name] = !ele.hideInTable;
     });
-    const rows = data
+
+    return model
+  
+  }, [DataSchema]);
+
+
 
   return (
     <DataGrid
