@@ -23,13 +23,14 @@ function DynamicInputForm({initialData, schema, onSubmitFunc}) {
             schema.map(ele => {
                 if("hiddenFromForm" in ele)
                     return
+
                 return (
-                <InputRenderer 
-                    key={ele.name}
-                    ele={ele} 
-                    handleChange={handleChange} 
-                    formValues={formValues} 
-                />
+                    <InputRenderer 
+                        key={ele.name}
+                        ele={ele} 
+                        handleChange={handleChange} 
+                        formValues={formValues} 
+                    />
                 )
             })
             }        

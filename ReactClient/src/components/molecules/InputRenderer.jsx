@@ -1,6 +1,7 @@
 import LabelCheckbox from "../atoms/LabelCheckbox"
 import { TextField } from "@mui/material"
 import ImageInput from "./ImageInput"
+import ObjectPicker from "../organisms/ObjectPicker"
 
 const blockInvalidChars = (e) => {
     const invalid = ["e","E","+","-", ",", "."]
@@ -53,6 +54,14 @@ const inputMap = {
                 required={ele.required}
                 value={formValues[ele.name] || null}
                 onChange={handleChange}
+            />
+        ),
+        Object: ({ele, handleChange, formValues}) => (
+            <ObjectPicker
+                ele={ele}
+                handleChange={handleChange}
+                formValues={formValues[ele.name]}
+                required={ele.required}
             />
         )
         

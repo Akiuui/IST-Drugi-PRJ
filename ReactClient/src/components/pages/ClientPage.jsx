@@ -5,9 +5,12 @@ import CardsRenderer from "../molecules/CardsRenderer.jsx"
 import SortByNumberKey from "../../utils/SortByNumberKey.js"
 import { useEffect, useState } from "react"
 
-function ClientPage({DataClass, schema}) {
+function ClientPage({Class}) {
 
-  const data = useFetchData(DataClass)
+  const {schema, model:DataClass} = Class
+
+  const {data} = useFetchData(DataClass)
+  
   const [editedData, setEditedData] = useState()
 
   useEffect(() => {

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import {getItemByIdDb} from "../services/dbActions"
 
 function useDynamicForm({initialData, schema}) {
 
@@ -24,6 +25,8 @@ function useDynamicForm({initialData, schema}) {
                     case "image":
                         initalValues[ele.name] = null
                         break
+                    case "object":
+                        initalValues[ele.name] = null
                     default:
                         initalValues[ele.name] = ""
                         break
@@ -39,7 +42,14 @@ function useDynamicForm({initialData, schema}) {
 
 
     const handleChange = async (e) => {
-        const {name, type, checked, value, files} = e.target
+        let name, type, checked, value, files
+
+        try{
+            ({name, type, checked, value, files} = e.target)
+        }
+        catch(err){
+            console.log(err)
+        }
 
         let valueType
 
@@ -50,18 +60,18 @@ function useDynamicForm({initialData, schema}) {
             case "file":
                 valueType = files?.[0] || null
             break;
+            case "object":
+                valueType = value
             default:
                 valueType = value
             break;
         }
-
         setFormValues(prev => ({
             ...prev,
             [name]: valueType
         }))
 
     }
-
 
     return {formValues, handleChange}
 

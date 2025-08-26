@@ -7,10 +7,12 @@ import AlertDialog from "../atoms/AlertDialog.jsx"
 import useFetchData from "../../hooks/useFetchData.js";
 
 
-function AdminPage({DataClass, schema}) {
+function AdminPage({Class}) {
 
-  const data = useFetchData(DataClass)
-  const {error, clearError, handleAdd, handleUpdate, handleRemove} = useAdminController()
+  const {schema, model:DataClass} = Class
+  
+  const {data, FetchData, isLoading} = useFetchData(DataClass)
+  const {error, clearError, handleAdd, handleUpdate, handleRemove} = useAdminController({DataClass, FetchData})
   const [selectedRows, setSelectedRows] = useState({ type: 'include', ids: new Set() });
 
   const handleSelectionChange = (newSelection) => {
@@ -22,7 +24,7 @@ function AdminPage({DataClass, schema}) {
  
     <Container sx={{bgcolor: 'secondary.main', height: 'calc(100vh - 64px)', padding:"16px", display: "flex", flexDirection: "column"}}>
         
-      <AdminActions 
+      <AdminActions
         selectedIds={Array.from(selectedRows["ids"])} 
         onAdd={handleAdd} 
         onUpdate={handleUpdate}
@@ -37,6 +39,7 @@ function AdminPage({DataClass, schema}) {
           handleSelectionChange={handleSelectionChange}
           checkboxSelection={true}
           orderBy={"name"}
+          isLoading={isLoading}
         />
       </Box>
 

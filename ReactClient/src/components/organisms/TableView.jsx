@@ -1,6 +1,7 @@
 import { DataGrid } from "@mui/x-data-grid"
+import { useEffect } from "react";
 
-function TableView({DataSchema, data, selectedRows, handleSelectionChange, checkboxSelection = false, orderBy}) {
+function TableView({ DataSchema, data, selectedRows, handleSelectionChange, checkboxSelection = false, orderBy, isLoading=false}) {
     
     const visibilityModel = {}
     const columns = DataSchema.map(ele => {
@@ -17,12 +18,13 @@ function TableView({DataSchema, data, selectedRows, handleSelectionChange, check
         className="hide-select-all"
         rows={rows}
         columns={columns}
-        getRowId={(row) => row.id}
+        getRowId={(row) => row._id}
         initialState={{
             sorting: {
               sortModel: [{ field: orderBy, sort: 'desc' }],
             },
           }}
+        loading={isLoading}
         columnVisibilityModel={visibilityModel}
         {...(checkboxSelection && {
             checkboxSelection: true,

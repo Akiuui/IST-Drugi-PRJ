@@ -3,12 +3,14 @@ const RezervacijaSchema = [
         name: "_id",
         type: "String",
         required: true,
-        hiddenFromForm: true
+        hiddenFromForm: true,
+        hideInTable: true,
+
     },
     {
         name: "vozilo",
         label: 'Vozilo (Car)',
-        type: 'String',
+        type: 'Object',
         required: true,
     },
     {
@@ -26,8 +28,10 @@ const RezervacijaSchema = [
     {
         name: "zakupac",
         label: "Zakupac Vozila",
-        type: "String",
+        type: "Object",
         required: false,
+        // hiddenFromForm: true,
+
     },
 
 ]

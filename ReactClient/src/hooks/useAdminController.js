@@ -2,16 +2,16 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { deleteItemDb} from "../services/dbActions"
 import {v4 as uuidv4} from "uuid"
-import useFetchData from "./useFetchData"
 
-function useAdminController() {
+function useAdminController({DataClass,FetchData}) {
 
     const [error, setError] = useState()
+
     const navigate = useNavigate()
 
     const handleAdd = () => {
         
-        navigate(`/admin/${uuidv4()}`)
+        navigate(`/admin/${DataClass.getName()}/${uuidv4()}`)
 
     }
 
@@ -24,7 +24,7 @@ function useAdminController() {
         }
         const id = rowIds[0]
 
-        navigate(`/admin/${id}`)
+        navigate(`/admin/${DataClass.getName()}/${id}`)
 
     }
 
@@ -38,8 +38,8 @@ function useAdminController() {
 
         try{
 
-            await Promise.all(rowIds.map(id => deleteItemDb(id)))
-            await useFetchData()
+            await Promise.all(rowIds.map(id => deleteItemDb(DataClass.getName(),id)))
+            FetchData()
 
         }catch(err){
             console.log(err)
@@ -57,7 +57,7 @@ function useAdminController() {
         clearError,
         handleAdd,
         handleUpdate,
-        handleRemove
+        handleRemove,
     }
 
 }

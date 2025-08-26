@@ -5,7 +5,7 @@ class RezervacijaModel extends AbstractDataClass{
 
     constructor(){
         super()
-        this.id = null
+        this._id = null
         this.vozilo = null
         this.datumPreuzimanja = ""
         this.datumVracanja = ""
@@ -13,7 +13,7 @@ class RezervacijaModel extends AbstractDataClass{
     }
 
     getId(){
-        return this.id
+        return this._id
     }
 
     static getName(){
@@ -21,7 +21,7 @@ class RezervacijaModel extends AbstractDataClass{
     }
 
     FormConstructor({id, formData}){
-        this.id = id
+        this._id = id
         this.vozilo = formData["vozilo"]
         this.datumPreuzimanja = formData["datumPreuzimanja"]
         this.datumVracanja = formData["datumVracanja"]
@@ -29,7 +29,7 @@ class RezervacijaModel extends AbstractDataClass{
     }
 
     DbConstructor(dbData){
-        this.id = dbData["id"]
+        this._id = dbData["_id"]
         this.vozilo = dbData["vozilo"]
         this.datumPreuzimanja = dbData["datumPreuzimanja"]
         this.datumVracanja = dbData["datumVracanja"]
